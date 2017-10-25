@@ -1,26 +1,52 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link href="../static/bootstrap/css/bootstrap.css" th:href="@{/bootstrap/css/bootstrap.css}" rel="stylesheet"/>
     <title>Title</title>
+    <script src="../static/bootstrap/js/jquery-1.10.0.js" th:src="@{/bootstrap/js/jquery-1.10.0.js}"></script>
+    <script src="../static/bootstrap/js/jquery-ui.min.js" th:src="@{/bootstrap/js/jquery-ui.min.js}"></script>
+    <script src="../static/bootstrap/js/bootstrap.min.js" th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
 </head>
-<body>
-<table>
-    <caption>客户列表</caption>
-    <thead>
-    <tr>
-        <th scope="col">ID</th>
-        <th scope="col">姓名</th>
-        <th scope="col">年龄</th>
+<body >
 
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="customers : ${data}">
-        <td th:text="${customers.id}">01</td>
-        <td th:text="${customers.name}">朱遇平</td>
-        <td th:text="${customers.age}">java</td>
-    </tr>
-    </tbody>
-</table>
+<div class="row">
+    <div class="col-lg-6">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search for..."/>
+            <span class="input-group-btn">
+        <button class="btn btn-default" type="button">Go!</button>
+      </span>
+        </div><!-- /input-group -->
+    </div><!-- /.col-lg-6 -->
+</div><!-- /.row -->
+<div class="body_wrap">
+    <div class="container">
+        <div class="alert alert-success text-center" role="alert">Sptring Boot学习资源大奉送，爱我就关注嘟嘟公众号：嘟爷java超神学堂</div>
+        <table class="table table-striped table-bordered table-hover">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">姓名</th>
+                <th scope="col">年龄</th>
+                <th scope="col">操作</th>
+
+            </tr>
+            <!--/*@thymesVar id="learnList" type=""*/-->
+            <tr th:each="customers : ${data}">
+                <td th:text="${customers.id}"></td>
+                <td th:text="${customers.name}"></td>
+                <td th:text="${customers.age}"></td>
+                <td >click</td>
+            </tr>
+        </table>
+
+    </div>
+
+
+
+</div>
 </body>
+
 </html>

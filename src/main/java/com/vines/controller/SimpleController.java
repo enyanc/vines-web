@@ -10,10 +10,10 @@ import java.util.List;
 
 @Controller
 public class SimpleController {
-    static final private
-    List<Customer> customers = new ArrayList<Customer>();
+
     @RequestMapping("/")
     String home(ModelMap map){
+        List<Customer> customers = new ArrayList<Customer>();
         customers.add(new Customer(1L, "siva01", 12));
         customers.add(new Customer(2L, "siva02", 18));
         customers.add(new Customer(3L, "siva10", 25));
