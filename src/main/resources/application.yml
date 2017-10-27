@@ -1,9 +1,26 @@
 spring:
-  #thymeleaf:
-    #cache: false
-    #check-template: false
-    #content-type: text/html
-    #encoding: UTF-8
-   # mode: HTML5
- #   prefix: classpath:/templates/
- #   suffix: .thymeleaf
+  thymeleaf:
+    cache: false
+    check-template-location: true
+    content-type: text/html
+    enabled: true
+    encoding: utf-8
+    mode: HTML5
+    prefix: classpath:/templates/
+    suffix: .html
+    excluded-view-names:
+    template-resolver-order:
+  datasource:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/world
+      username: root
+      password: enyanc
+      initialize: true
+      init-db: true
+  jpa:
+      database: mysql
+      show-sql: true
+      hibernate:
+        ddl-auto: update
+        naming:
+        strategy: org.hibernate.cfg.ImprovedNamingStrategy
