@@ -6,30 +6,35 @@
 <body>
 <div th:fragment="pager2">
     <div class="text-right" th:with="baseUrl=${#httpServletRequest.getRequestURL().toString()},pars=${#httpServletRequest.getQueryString() eq null ? '' : new String(#httpServletRequest.getQueryString().getBytes('iso8859-1'), 'UTF-8')}">
-        <ul  class="pagination"
+        <ul  class="pagination justify-content-end"
              th:with="newPar=${new java.lang.String(pars eq null ? '' : pars).replace('page='+(datas.number), '')},
                                                 curTmpUrl=${baseUrl+'?'+newPar},
                                                 curUrl=${curTmpUrl.endsWith('&amp;') ? curTmpUrl.substring(0, curTmpUrl.length()-1):curTmpUrl}" >
 
             <!--首页-->
-            <li class="page-item" data-th-classappend="${(datas.number + 1) eq 1} ? 'active' : ''" >
+            <li class="page-item" data-th-classappend="${(datas.number + 1) eq 1} ? 'disabled' : ''" >
                 <a href="#"  class="page-link"  th:href="@{${curUrl}(page=0)}" >首页</a>
             </li>
 
             <!--上一页-->
-            <li class="page-item" th:if="${datas.hasPrevious()}">
+            <li class="page-item" th:if="${datas.hasPrevious()}" data-th-classappend="${(datas.number+1) eq 1} ? 'disabled' : ''">
                 <a href="#"  class="page-link" th:href="@{${curUrl}(page=${datas.number-1})}">上一页</a>
             </li>
+
 
 
             <!--总页数小于等于10-->
             <div th:if="${(datas.totalPages le 10) and (datas.totalPages gt 0)}" th:remove="tag">
                 <div th:each="pg : ${#numbers.sequence(0, datas.totalPages - 1)}" th:remove="tag">
-                        <span th:if="${pg eq datas.getNumber()}" th:remove="tag">
-                            <li class="active"><span class="current_page line_height" th:text="${pg+1}">${pageNumber}</span></li>
-                        </span>
+                    <span th:if="${pg eq datas.getNumber()}" th:remove="tag">
+<!--
+                           <span th:unless="${(pg eq 0) }" th:remove="tag">
+-->
+                                 <li class="page-item active"><a class="page-link" th:href="@{${curUrl}(page=${pg})}" th:text="${pg+1}"></a></li>
+                            </span>
+                       <!-- </span>-->
                     <span th:unless="${pg eq datas.getNumber()}" th:remove="tag">
-                            <li><a href="#" th:href="@{${curUrl}(page=${pg})}" th:text="${pg+1}"></a></li>
+                            <li class="page-item"><a href="#"   class="page-link" th:href="@{${curUrl}(page=${pg})}" th:text="${pg+1}"></a></li>
                         </span>
                 </div>
             </div>
@@ -44,10 +49,13 @@
             </div>
 
 
-            <li th:if="${datas.hasNext()}"><a href="#" th:href="@{${curUrl}(page=${datas.number+1})}">下一页</a></li>
+            <!--下一页-->
+            <li class="page-item" th:if="${datas.hasNext()}">
+                <a href="#" class="page-link" th:href="@{${curUrl}(page=${datas.number+1})}">下一页</a>
+            </li>
             <!--<li><a href="#" th:href="@{${curUrl}(page=${datas.totalPages-1})}">尾页</a></li>-->
-            <li><a href="#" th:href="${datas.totalPages le 0 ? curUrl+'page=0':curUrl+'&amp;page='+(datas.totalPages-1)}">尾页</a></li>
-            <li><span th:utext="'共'+${datas.totalPages}+'页 / '+${datas.totalElements}+' 条'"></span></li>
+            <li class="page-item " data-th-classappend="${(datas.number+1) eq (datas.totalPages)} ? 'disabled' : ''"><a href="#" class="page-link" th:href="${datas.totalPages le 0 ? curUrl+'page=0':curUrl+'&amp;page='+(datas.totalPages-1)}">尾页</a></li>
+            <li class="page-item"><span class="page-link" th:utext="'共'+${datas.totalPages}+'页 / '+${datas.totalElements}+' 条'"></span></li>
         </ul>
     </div>
 </div>

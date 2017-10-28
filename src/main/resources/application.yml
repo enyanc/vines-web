@@ -12,9 +12,9 @@ spring:
     template-resolver-order:
   datasource:
       driver-class-name: com.mysql.jdbc.Driver
-      url: jdbc:mysql://localhost:3306/world
+      url: jdbc:mysql://localhost:3306/mysql
       username: root
-      password: enyanc
+      password: enyan
       initialize: true
       init-db: true
   jpa:
