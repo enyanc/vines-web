@@ -18,18 +18,19 @@ public class BookController {
     BookQueryService bookQueryService;
 
     @RequestMapping("/findBookNoQuery")
-    public String findBookNoQuery(ModelMap modelMap, @RequestParam(value = "page", defaultValue = "0") Integer page,
-                                  @RequestParam(value = "size", defaultValue = "5") Integer size){
+    public String findBookNoQuery(ModelMap modelMap, @RequestParam(value = "pageIndex", defaultValue = "0") Integer page,
+                                  @RequestParam(value = "size", defaultValue = "1") Integer size){
         Page<Book> datas = bookQueryService.findBookNoCriteria(page, size);
-        modelMap.addAttribute("datas", datas);
+        modelMap.addAttribute("page", datas);
+        System.out.println(datas.toString());
         return "index1";
     }
 
     @RequestMapping(value = "/findBookQuery",method = {RequestMethod.GET,RequestMethod.POST})
-    public String findBookQuery(ModelMap modelMap, @RequestParam(value = "page", defaultValue = "0") Integer page,
+    public String findBookQuery(ModelMap modelMap, @RequestParam(value = "pageIndex", defaultValue = "0") Integer page,
                                 @RequestParam(value = "size", defaultValue = "5") Integer size, BookQuery bookQuery){
         Page<Book> datas = bookQueryService.findBookCriteria(page, size,bookQuery);
-        modelMap.addAttribute("datas", datas);
+        modelMap.addAttribute("page", datas);
         return "index2";
     }
 }

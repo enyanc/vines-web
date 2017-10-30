@@ -9,7 +9,8 @@
     <script src="../static/bootstrap/js/bootstrap.min.js" th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
 </head>
 <body>
-<form th:action="@{/queryBook/findBookQuery}" th:object="${bookQuery}" th:method="get">
+<form th:id="form1"  th:action="@{/queryBook/findBookQuery}" th:object="${bookQuery}" th:method="post">
+    <input  name="pageIndex" th:value="1" type="hidden"/>
     <div class="form-group">
         <label class="col-sm-2 control-label" >name</label>
         <div class="col-sm-4">
@@ -27,6 +28,8 @@
         </div>
         <div class="col-sm-4">
             <button class="btn btn-default" type="submit" placeholder="查询">查询</button>
+            <button class="btn btn-default" type="button" th:onclick="'button()'" placeholder="查询">点我</button>
+
         </div>
     </div>
 </form>
@@ -40,7 +43,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="obj : ${datas}">
+    <tr th:each="obj : ${page}">
         <td th:text="${obj.id}">${obj.id}</td>
         <td th:text="${obj.name}">${obj.name}</td>
         <td th:text="${obj.isbn}">${obj.isbn}</td>
@@ -50,4 +53,11 @@
 </table>
 <div th:include="page :: pager2" th:remove="tag"></div>
 </body>
+<script>
+    function button(){
+        $("#form1").submit();
+    }
+
+
+</script>
 </html>
