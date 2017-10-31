@@ -10,7 +10,6 @@
 </head>
 <body>
 <form th:id="form1"  th:action="@{/queryBook/findBookQuery}" th:object="${bookQuery}" th:method="post">
-    <input  name="pageIndex" th:value="1" type="hidden"/>
     <div class="form-group">
         <label class="col-sm-2 control-label" >name</label>
         <div class="col-sm-4">
@@ -32,6 +31,7 @@
 
         </div>
     </div>
+    <div th:include="page :: init_page"/>
 </form>
 <table class="table table-hover">
     <thead>
@@ -51,13 +51,12 @@
     </tr>
     </tbody>
 </table>
-<div th:include="page :: pager2" th:remove="tag"></div>
+<div th:include="page :: pager" th:remove="tag"></div>
 </body>
+<script th:include="page :: pager_event"></script>
 <script>
     function button(){
         $("#form1").submit();
     }
-
-
 </script>
 </html>

@@ -28,7 +28,7 @@ public class BookController {
 
     @RequestMapping(value = "/findBookQuery",method = {RequestMethod.GET,RequestMethod.POST})
     public String findBookQuery(ModelMap modelMap, @RequestParam(value = "pageIndex", defaultValue = "0") Integer page,
-                                @RequestParam(value = "size", defaultValue = "5") Integer size, BookQuery bookQuery){
+                                @RequestParam(value = "size", defaultValue = "10") Integer size, BookQuery bookQuery){
         Page<Book> datas = bookQueryService.findBookCriteria(page, size,bookQuery);
         modelMap.addAttribute("page", datas);
         return "index2";
