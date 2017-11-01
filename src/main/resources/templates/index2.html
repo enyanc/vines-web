@@ -1,37 +1,35 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<html lang="en">
+<head data-th-include="header :: header">
     <meta charset="UTF-8"/>
     <title>Title</title>
-    <link href="../static/bootstrap/css/bootstrap.css" th:href="@{/bootstrap/css/bootstrap.css}" rel="stylesheet"/>
-    <script src="../static/bootstrap/js/jquery-1.10.0.js" th:src="@{/bootstrap/js/jquery-1.10.0.js}"></script>
-    <script src="../static/bootstrap/js/jquery-ui.min.js" th:src="@{/bootstrap/js/jquery-ui.min.js}"></script>
-    <script src="../static/bootstrap/js/bootstrap.min.js" th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+
 </head>
-<body>
-<form th:id="form1"  th:action="@{/queryBook/findBookQuery}" th:object="${bookQuery}" th:method="post">
+<body >
+<div data-th-replace="navbar :: nav" ></div>
+<div class="alert alert-success text-center" role="alert">Sptring Boot学习资源大奉送，爱我就关注嘟嘟公众号：嘟爷java超神学堂</div>
+<form   data-th-action="@{/queryBook/findBookQuery}" data-th-object="${bookQuery}" data-th-method="post">
     <div class="form-group">
         <label class="col-sm-2 control-label" >name</label>
         <div class="col-sm-4">
-            <input type="text" class="form-control" id="name" placeholder="请输入名称" th:field="*{name}"/>
+            <input type="text" class="form-control" id="name" placeholder="请输入名称" data-th-field="*{name}"/>
         </div>
         <label class="col-sm-2 control-label">isbn</label>
         <div class="col-sm-4">
-            <input type="text" class="form-control" id="isbn" placeholder="请输ISBN" th:field="*{isbn}"/>
+            <input type="text" class="form-control" id="isbn" placeholder="请输ISBN" data-th-field="*{isbn}"/>
         </div>
     </div>
     <div class="form-group">
         <label class="col-sm-2 control-label" >author</label>
         <div class="col-sm-4">
-            <input type="text" class="form-control" id="author" placeholder="请输author" th:field="*{author}"/>
-        </div>
-        <div class="col-sm-4">
-            <button class="btn btn-default" type="submit" placeholder="查询">查询</button>
-            <button class="btn btn-default" type="button" th:onclick="'button()'" placeholder="查询">点我</button>
-
+            <input type="text" class="form-control" id="author" placeholder="请输author" data-th-field="*{author}"/>
         </div>
     </div>
-    <div th:include="page :: init_page"/>
+
+        <button class="btn btn-primary " type="submit" placeholder="查询">查询</button>
+        <button class="btn btn-default " type="button" data-th-onclick="'button()'" placeholder="查询">点我</button>
+
+    <div data-th-include="page :: init_page"/>
 </form>
 <table class="table table-hover">
     <thead>
@@ -43,17 +41,17 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="obj : ${page}">
-        <td th:text="${obj.id}">${obj.id}</td>
-        <td th:text="${obj.name}">${obj.name}</td>
-        <td th:text="${obj.isbn}">${obj.isbn}</td>
-        <td th:text="${obj.name}">${obj.author}</td>
+    <tr data-th-each="obj : ${page}">
+        <td data-th-text="${obj.id}">${obj.id}</td>
+        <td data-th-text="${obj.name}">${obj.name}</td>
+        <td data-th-text="${obj.isbn}">${obj.isbn}</td>
+        <td data-th-text="${obj.name}">${obj.author}</td>
     </tr>
     </tbody>
 </table>
-<div th:include="page :: pager" th:remove="tag"></div>
+<div data-th-include="page :: pager" data-th-remove="tag"></div>
 </body>
-<script th:include="page :: pager_event"></script>
+<script data-th-include="page :: pager_event"></script>
 <script>
     function button(){
         $("#form1").submit();
