@@ -33,4 +33,11 @@ public class BookController {
         modelMap.addAttribute("page", datas);
         return "index2";
     }
+
+    @RequestMapping(value = "/del",method = {RequestMethod.GET,RequestMethod.POST})
+    public String delBookById(ModelMap modelMap,
+                                @RequestParam(value = "bookId") Long id){
+        bookQueryService.delById(id);
+        return "redirect:/queryBook/findBookQuery";
+    }
 }

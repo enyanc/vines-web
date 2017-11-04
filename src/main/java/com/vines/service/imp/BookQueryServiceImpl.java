@@ -51,4 +51,12 @@ public class BookQueryServiceImpl implements BookQueryService {
         },pageable);
         return bookPage;
     }
+
+
+    @Override
+    public void delById(Long id) {
+        bookRepository.delete(id);
+    }
+
+
 }
