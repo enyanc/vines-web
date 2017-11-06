@@ -3,7 +3,6 @@
 <head data-th-include="header :: header">
     <meta charset="UTF-8"/>
     <title>Title</title>
-
 </head>
 <body >
 <div data-th-replace="navbar :: nav" ></div>
@@ -51,12 +50,16 @@
         <td data-th-text="${obj.name}">${obj.author}</td>
         <td>
             <a class="page-link" data-th-href="@{/queryBook/del(bookId=${obj.id})}">del</a>|
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-th-id="${obj.id}" >Open modal for @mdo</button>
+
         </td>
     </tr>
     </tbody>
 </table>
 </div>
 <div data-th-include="page :: pager" data-th-remove="tag"></div>
+
+
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Open modal for @mdo</button>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -93,20 +96,17 @@
 </body>
 <script data-th-include="page :: pager_event"></script>
 <script>
-    function button(){
-        $("#form1").submit();
-    }
 
 
   $('#exampleModal').on('show.bs.modal', function (event) {
       var button = $(event.relatedTarget) // Button that triggered the modal
-      var recipient = button.data('whatever') // Extract info from data-* attributes
-      alert(recipient)
+      var recipient = button.attr("id"); // Extract info from data-* attributes
+
       // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
       // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-     // var modal = $(this)
-      //modal.find('.modal-title').text('New message to ' + recipient)
-      //modal.find('.modal-body input').val(recipient)
+        var modal = $(this)
+      modal.find('.modal-title').text('New message to ' + recipient)
+      modal.find('.modal-body input').val(recipient)
 })
 </script>
 </html>

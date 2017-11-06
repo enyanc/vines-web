@@ -26,12 +26,12 @@
 
             <!--首页-->
             <li class="page-item" data-th-classappend="${(page.number + 1) eq 1} ? 'disabled' : ''" >
-                <a href="#"  class="page-link" data-th-onclick="'openPage(0,\''+${page.size}+'\')'"  >首页</a>
+                <span href="#"  class="page-link" data-th-onclick="'openPage(0,\''+${page.size}+'\')'"  >首页</span>
             </li>
 
             <!--上一页-->
             <li class="page-item" data-th-if="${page.hasPrevious()}" data-th-classappend="${(page.number+1) eq 1} ? 'disabled' : ''">
-                <a href="#"  class="page-link" data-th-onclick="'openPage(\''+${page.number-1}+'\',\''+${page.size}+'\')'">上一页</a>
+                <span href="#"  class="page-link" data-th-onclick="'openPage(\''+${page.number-1}+'\',\''+${page.size}+'\')'">上一页</span>
             </li>
 
 
@@ -41,12 +41,12 @@
                 <div data-th-each="pg : ${#numbers.sequence(0, page.totalPages - 1)}" data-th-remove="tag">
                     <span data-th-if="${pg eq page.getNumber()}" data-th-remove="tag">
                                  <li class="page-item active">
-                                     <a class="page-link"  data-th-onclick="'openPage(\''+${pg}+'\',\''+${page.size}+'\')'"  data-th-text="${pg+1}"></a>
+                                     <span class="page-link"  data-th-onclick="'openPage(\''+${pg}+'\',\''+${page.size}+'\')'"  data-th-text="${pg+1}"></span>
                                  </li>
                     </span>
                     <span data-th-unless="${pg eq page.getNumber()}" data-th-remove="tag">
                             <li class="page-item">
-                                <a href="#"   class="page-link" data-th-onclick="'openPage(\''+${pg}+'\',\''+${page.size}+'\')'"   data-th-text="${pg+1}"></a>
+                                <span href="#"   class="page-link" data-th-onclick="'openPage(\''+${pg}+'\',\''+${page.size}+'\')'"   data-th-text="${pg+1}"></span>
                             </li>
                     </span>
                 </div>
@@ -55,30 +55,30 @@
             <!-- 总数数大于10时 -->
             <div data-th-if="${page.totalPages gt 10}" data-th-remove="tag">
                 <li class="page-item" data-th-if="${page.number-2 ge 0}">
-                    <a href="#"  class="page-link" data-th-href="@{${curUrl}(pageIndex=${page.number}-2)}" data-th-text="${page.number-1}"></a>
+                    <span href="#"  class="page-link" data-th-href="@{${curUrl}(pageIndex=${page.number}-2)}" data-th-text="${page.number-1}"></span>
                 </li>
                 <li class="page-item" data-th-if="${page.number-1 ge 0}">
-                    <a href="#"  class="page-link" data-th-href="@{${curUrl}(pageIndex=${page.number}-1)}" data-th-text="${page.number}"></a>
+                    <span href="#"  class="page-link" data-th-href="@{${curUrl}(pageIndex=${page.number}-1)}" data-th-text="${page.number}"></span>
                 </li>
                 <li class="page-item active" >
-                    <a class="page-link" data-th-text="${page.number+1}"></a>
+                    <span class="page-link" data-th-text="${page.number+1}"></span>
                 </li>
                 <li class="page-item" data-th-if="${page.number+1 lt page.totalPages}">
-                    <a href="#"  class="page-link" data-th-href="@{${curUrl}(pageIndex=${page.number}+1)}" data-th-text="${page.number+2}"></a>
+                    <span href="#"  class="page-link" data-th-href="@{${curUrl}(pageIndex=${page.number}+1)}" data-th-text="${page.number+2}"></span>
                 </li>
                 <li class="page-item" data-th-if="${page.number+2 lt page.totalPages}">
-                    <a href="#"   class="page-link" data-th-href="@{${curUrl}(pageIndex=${page.number}+2)}" data-th-text="${page.number+3}"></a>
+                    <span href="#"   class="page-link" data-th-href="@{${curUrl}(pageIndex=${page.number}+2)}" data-th-text="${page.number+3}"></span>
                 </li>
             </div>
 
 
             <!--下一页-->
             <li class="page-item" data-th-if="${page.hasNext()}">
-                <a href="#" class="page-link" data-th-onclick="'openPage(\''+${page.number+1}+'\',\''+${page.size}+'\')'"  >下一页</a>
+                <span href="#" class="page-link" data-th-onclick="'openPage(\''+${page.number+1}+'\',\''+${page.size}+'\')'"  >下一页</span>
             </li>
-            <!--<li><a href="#" data-th-href="@{${curUrl}(page=${datas.totalPages-1})}">尾页</a></li>-->
+            <!--<li><span href="#" data-th-href="@{${curUrl}(page=${datas.totalPages-1})}">尾页</span></li>-->
             <li class="page-item " data-th-classappend="${(page.number+1) eq (page.totalPages)} ? 'disabled' : ''">
-                <a href="#" class="page-link"  data-th-onclick="'openPage(\''+${page.totalPages-1}+'\',\''+${page.size}+'\')'"   data-th-href="${page.totalPages le 0 ? curUrl+'pageIndex=0':curUrl+'&amp;pageIndex='+(page.totalPages-1)}">尾页</a>
+                <span href="#" class="page-link"  data-th-onclick="'openPage(\''+${page.totalPages-1}+'\',\''+${page.size}+'\')'"   data-th-href="${page.totalPages le 0 ? curUrl+'pageIndex=0':curUrl+'&amp;pageIndex='+(page.totalPages-1)}">尾页</span>
             </li>
             <li class="page-item">
                 <span class="page-link disabled" data-th-utext="'共'+${page.totalPages}+'页 / '+${page.totalElements}+' 条'"></span>
