@@ -8,5 +8,7 @@ public interface BookQueryService {
     Page<Book> findBookNoCriteria(Integer page, Integer size);
     Page<Book> findBookCriteria(Integer page,Integer size,BookQuery bookQuery);
     void delById(Long Id);
+    Book  queryById(Long Id);
+    void save(Book book);
 
 }

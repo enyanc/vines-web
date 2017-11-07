@@ -58,5 +58,15 @@ public class BookQueryServiceImpl implements BookQueryService {
         bookRepository.delete(id);
     }
 
+    @Override
+    public Book queryById(Long id) {
+        return bookRepository.findOne(id);
+    }
+
+    @Override
+    public void save(Book book) {
+        bookRepository.saveAndFlush(book);
+    }
+
 
 }
