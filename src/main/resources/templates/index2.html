@@ -27,10 +27,9 @@
 
         <button class="btn btn-primary " type="submit" placeholder="查询">查询</button>
         <button class="btn btn-default " type="button" data-th-onclick="'button()'" placeholder="查询">点我</button>
-
     <div data-th-include="page :: init_page"/>
 </form>
-<div class="">
+<div >
 <table class="table table-striped table-bordered table-hover">
     <thead>
     <tr>
@@ -47,10 +46,10 @@
         <td data-th-text="${obj.id}">${obj.id}</td>
         <td data-th-text="${obj.name}">${obj.name}</td>
         <td data-th-text="${obj.isbn}">${obj.isbn}</td>
-        <td data-th-text="${obj.name}">${obj.author}</td>
+        <td data-th-text="${obj.author}">${obj.author}</td>
         <td>
             <a class="page-link" data-th-href="@{/queryBook/del(bookId=${obj.id})}">del</a>|
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-th-id="${obj.id}" >Open modal for @mdo</button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-th-id="${obj.id}"  >Open modal for @mdo</button>
 
         </td>
     </tr>
@@ -58,11 +57,11 @@
 </table>
 </div>
 <div data-th-include="page :: pager" data-th-remove="tag"></div>
-
+<div data-th-include="modal :: modal" data-th-remove="tag"></div>
 
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Open modal for @mdo</button>
 
-<div data-th-fragment="editc" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!--<div data-th-fragment="editc" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -72,7 +71,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form data-th-action="@{/queryBook/edit}" data-th-object="${bookQuery}" data-th-method="post">
+                <form data-th-action="@{/queryBook/edit}" data-th-object="${book}" data-th-method="post">
                     <div class="form-group">
                         <label for="recipient-name" class="form-control-label">Recipient:</label>
                         <input type="text" class="form-control" id="recipient-name" data-th-field="*{name}"/>
@@ -90,14 +89,13 @@
             </div>
         </div>
     </div>
-</div>
+</div>-->
 
 
 
 </body>
 <script data-th-include="page :: pager_event"></script>
 <script>
-
 
   $('#exampleModal').on('show.bs.modal', function (event) {
       var button = $(event.relatedTarget) // Button that triggered the modal
