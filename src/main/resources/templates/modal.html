@@ -28,14 +28,20 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="send">Send message</button>
+                <button type="button" class="btn btn-secondary "   data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-style="contract-overlay" id="send">
+                    <span class="ladda-label">send Message</span>
+                </button>
             </div>
         </div>
     </div>
 </div>
 <script>
-   $("#send").bind("click",function(){
+   $("#send").bind("click",function(e){
+       e.preventDefault();
+//       modalShow();
+       var l = Ladda.create(this);
+       l.start("加载中....");
        var data='{"id":"5","name":"1dxxx","isbn":"abc","author":"hello"}'
        $.ajax({
            type:"post",
@@ -46,6 +52,8 @@
            success: function (data) {
                var result=JSON.parse(JSON.stringify(data));
                if(result.success='true'){
+                   l.stop();
+//                   modalHide();
                    window.location.href='/queryBook/findBookQuery';
                }
            }

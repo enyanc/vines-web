@@ -7,7 +7,7 @@
 <body>
 <h2>创建模态框（Modal）</h2>
 <!-- 按钮触发模态框 -->
-<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">开始演示模态框</button>
+<button class="btn btn-primary btn-lg"  id="cc" data-target="#loadingModal">开始演示模态框</button>
 <!-- 模态框（Modal） -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -26,5 +26,33 @@
 </div>
 
 
+<div class="modal fade" id="loadingModal" data-backdrop="static" data-keyboard="false">
+    <div style="width: 200px;height:20px; z-index: 20000; position: absolute; text-align: center; left: 50%; top: 50%;margin-left:-100px;margin-top:-10px">
+        <div class="progress progress-striped active"  role="progressbar"  style="margin-bottom: 0;">
+            <div class="progress-bar" style="width: 100%;"></div>
+        </div>
+        <h5>正在加载...</h5>
+    </div>
+</div>
+
+
+<script>
+    function modalShow(){
+        $("#loadingModal").modal('show');
+    }
+    function modalHide(){
+        $("#loadingModal").modal('hide');
+    }
+
+    $("#cc").bind('click',function(){
+        modalShow();
+    })
+
+    //隐藏
+//    $("#loadingModal").modal('hide');
+//    //按Tab键遮罩层不会消失 ，默认值为true
+//    $("#loadingModal").modal({keyboard:false});
+
+</script>
 </body>
 </html>

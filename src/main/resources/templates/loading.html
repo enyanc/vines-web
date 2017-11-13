@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8"/>
+    <title></title>
+</head>
+<body data-th-fragment="loading">
+<div class="modal fade" id="loadingModal" data-backdrop="static" data-keyboard="false">
+    <div style="width: 200px;height:20px; z-index: 20000; position: absolute; text-align: center; left: 50%; top: 50%;margin-left:-100px;margin-top:-10px">
+        <div class="progress-bar progress-bar-success  progress-bar-striped active"  role="progressbar"  style="margin-bottom: 0;">
+            <!--<div class="progress-bar" style="width: 100%;"></div>-->
+        </div>
+        <h5>页面加载中...</h5>
+    </div>
+</div>
+<script>
+    function loadingShow(){
+        $("#loadingModal").modal('show');
+    }
+    function loadingHide(){
+        $("#loadingModal").modal('hide');
+    }
+</script>
+</body>
+</html>
