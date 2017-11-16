@@ -24,3 +24,5 @@ spring:
         ddl-auto: update
         naming:
         strategy: org.hibernate.cfg.ImprovedNamingStrategy
+  server:
+       port: 8090
