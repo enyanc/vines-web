@@ -30,6 +30,6 @@ public class SimpleController {
 
     @RequestMapping("/loginIn")
     String submit(ModelMap map, User user ){
-        return "login";
+        return "redirect:/login";
     }
 }

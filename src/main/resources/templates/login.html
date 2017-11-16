@@ -46,15 +46,15 @@
                         </div>
                     </div>
                     <div class="form-bottom">
-                        <form role="form" data-th-action="@{/loginIn}"  method="post" class="login-form">
+                        <form id="defaultForm" role="form" data-th-action="@{/loginIn}"  method="post" class="login-form">
                             <div class="form-group">
-                                <label class="sr-only" for="form-username">Username</label>
-                                <input type="text" name="form-username" placeholder="请输入用户名" class="form-username form-control" id="form-username" aria-describedby="inputSuccess2Status"/>
-                                <span class="glyphicon  form-control-feedback" aria-hidden="true"></span>
-                                <span id="inputSuccess2Status" class="sr-only">(success)</span>
+                                <label class="sr-only" for="userName">Username</label>
+                                <input type="text" name="userName" placeholder="请输入用户名" class="form-username form-control" id="form-username" aria-describedby="inputSuccess2Status"/>
+                               <!-- <span class="glyphicon  form-control-feedback" aria-hidden="true"></span>
+                                <span id="inputSuccess2Status" class="sr-only">(success)</span>-->
                             </div>
                             <div class="form-group">
-                                <label class="sr-only" for="form-password">Password</label>
+                                <label class="sr-only" for="password">Password</label>
                                 <input type="password" name="password" placeholder="请输入密码" class="form-password form-control" id="form-password"/>
                             </div>
                             <button type="submit" class="btn">登录</button>
@@ -85,11 +85,77 @@
 
 </body>
 <script>
-    $("#form-username").bind('blur',function(){
-        $(this).parent().addClass(' has-success has-feedback ');
-        $(this).next().addClass('glyphicon-ok');
-        $(this).addClass('input-error');
-    })
+//    $("#form-username").bind('blur',function(){
+//        $(this).parent().addClass(' has-success has-feedback ');
+//        $(this).next().addClass('glyphicon-ok');
+//        $(this).addClass('input-error');
+//    })
+$(document).ready(function() {
+    $('#defaultForm')
+            .bootstrapValidator({
+                message: 'This value is not valid',
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+                    userName: {
+                        message: '用户名无效',
+                        validators: {
+                            notEmpty: {
+                                message: '用户名不能为空'
+                            },
+                            stringLength: {
+                                min: 6,
+                                max: 30,
+                                message: '用户名长度在6~30个字符之间'
+                            },
+                            /*remote: {
+                             url: 'remote.php',
+                             message: 'The username is not available'
+                             },*/
+                            regexp: {
+                                regexp: /^[a-zA-Z0-9_\.]+$/,
+                                message: '用户名只能由字母，数字，点号和下划线组成'
+                            }
+                        }
+                    },
+                /*    email: {
+                        validators: {
+                            notEmpty: {
+                                message: 'The email address is required and can\'t be empty'
+                            },
+                            emailAddress: {
+                                message: 'The input is not a valid email address'
+                            }
+                        }
+                    },*/
+                    password: {
+                        validators: {
+                            notEmpty: {
+                                message: '密码不能为空'
+                            }
+                        }
+                    }
+                }
+            });
+           /* .on('success.form.bv', function(e) {
+                // Prevent form submission
+                e.preventDefault();
+
+                // Get the form instance
+                var $form = $(e.target);
+
+                // Get the BootstrapValidator instance
+                var bv = $form.data('bootstrapValidator');
+
+                // Use Ajax to submit form data
+                $.post($form.attr('action'), $form.serialize(), function(result) {
+                    console.log(result);
+                }, 'json');
+            });*/
+});
 
 </script>
 </html>
