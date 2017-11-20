@@ -31,7 +31,7 @@ public class BookQueryServiceImpl implements BookQueryService {
 
     @Override
     public Page<Book> findBookCriteria(Integer page, Integer size, final BookQuery bookQuery) {
-        Pageable pageable = new PageRequest(page, size, Sort.Direction.ASC, "id");
+        Pageable pageable = new PageRequest(page, size, Sort.Direction.fromString(bookQuery.getOrder()), bookQuery.getSort()==null?"id":bookQuery.getSort());
         Page<Book> bookPage = bookRepository.findAll(new Specification<Book>(){
             @Override
             public Predicate toPredicate(Root<Book> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {

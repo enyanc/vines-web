@@ -1,6 +1,6 @@
 package com.vines.domain;
 
-public class BookQuery {
+public class BookQuery extends PageInfo{
     private String name;
     private String isbn;
     private String author;
@@ -30,4 +30,5 @@ public class BookQuery {
     public void setAuthor(String author) {
         this.author = author;
     }
+
 }

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
  * Created by 恩言 on 2017/11/16.
  */
 public class LoginInterceptor implements HandlerInterceptor {
-    private static final String[] LOING_URI={"/login"};
+    private static final String[] LOING_URI={"/login","/loginIn"};
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         boolean isNotInterceptor=false;

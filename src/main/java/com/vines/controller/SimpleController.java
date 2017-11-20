@@ -5,8 +5,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.thymeleaf.expression.Lists;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,8 +30,9 @@ public class SimpleController {
         return "login";
     }
 
-    @RequestMapping("/loginIn")
-    String submit(ModelMap map, User user ){
-        return "redirect:/login";
+    @RequestMapping(value = "/loginIn",method = {RequestMethod.GET,RequestMethod.POST})
+    String submit(ModelMap map, User user,HttpSession session){
+        session.setAttribute("user",user);
+        return "table";
     }
 }

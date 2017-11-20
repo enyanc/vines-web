@@ -8,23 +8,23 @@
     <!--引入导航条-->
     <div data-th-replace="navbar :: nav" ></div>
     <!--内容-->
-    <form  id="toolbar" data-th-action="@{/queryBook/findBookQuery}" data-th-object="${bookQuery}" data-th-method="post">
+    <form  id="toolbar" data-th-method="post">
        <!--引入隐藏的page相关参数，翻页使用-->
         <!--<div data-th-include="page :: init_page"/>-->
         <div class="form-group">
             <label class="col-sm-2 control-label" >name</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="name" placeholder="请输入名称" data-th-field="*{name}"/>
+                <input type="text" class="form-control" id="name" placeholder="请输入名称" />
             </div>
             <label class="col-sm-2 control-label">isbn</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="isbn" placeholder="请输ISBN" data-th-field="*{isbn}"/>
+                <input type="text" class="form-control" id="isbn" placeholder="请输ISBN" />
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label" >author</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="author" placeholder="请输author" data-th-field="*{author}"/>
+                <input type="text" class="form-control" id="author" placeholder="请输author" />
             </div>
         </div>
             <button class="btn btn-primary " type="submit" placeholder="查询">查询</button>
@@ -82,64 +82,65 @@
       var recipient = button.attr("id"); // Extract info from data-* attributes
       var modal = $(this)
       $.ajax({
-          type:"post",
-          url:"/queryBook/query?bookId="+recipient,
+          type: "post",
+          url: "/queryBook/query?bookId=" + recipient,
           contentType: "application/json; charset=utf-8",
           cache: false,
           success: function (data) {
-              var book=JSON.parse(JSON.stringify(data));
+              var book = JSON.parse(JSON.stringify(data));
               modal.find('.modal-title').text('New message to ' + book.id)
               modal.find('.modal-body input').val(book.name)
           }
-      });
+      })
+  })
 
       $(document).ready(function() {
-          var oTable = new TableInit();
-          oTable.Init();
 
           var TableInit = function () {
               $('#table_sysUser').bootstrapTable({
-                  url:'/queryBook/tableList',
+                  url: '/queryBook/tableList',
                   method: 'post',
                   toolbar: '#toolbar',
                   striped: true,
                   pagination: true,
-                  queryParams: oTableInit.queryParams,//传递参数（*）
-                  queryParamsType: 'limit',
+                  paginationLoop:true,
+                  queryParams: queryParams,//传递参数（*）
                   sidePagination: "server",
-                  pageNumber:1,                       //初始化加载第一页，默认第一页
+                  pageNumber: 1,                       //初始化加载第一页，默认第一页
                   pageSize: 15,                       //每页的记录行数（*）
                   pageList: [10, 15, 20, 50],
-                  showToggle:true,
+                  showToggle: true,
                   contentType: "application/x-www-form-urlencoded",
-                  columns:[
+                  columns: [
 
-                      {title:'id',field: 'id',sortable:true },
-                      {title:'姓名',field: 'name',sortable:true },
-                      {title:'出版社',field: 'isbn',sortable:true },
-                      {title:'作者',field: 'author',sortable:true }
+                      {title: 'id', field: 'id', sortable: true},
+                      {title: '姓名', field: 'name', sortable: true},
+                      {title: '出版社', field: 'isbn', sortable: true},
+                      {title: '作者', field: 'author', sortable: true}
 
                   ]
 
               });
-              oTableInit.queryParams = function (params) {
-                  var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
-                      pageSize: params.limit,   //页面大小
-                      pageNumber: params.pageNumber, //页码
-                      sortName: params.sort,  //排序列名
-                      sortOrder:params.order //排序方式
-                  };
-                  return temp;
-              };
               return oTableInit;
+          };
 
-          }
+          var queryParams = function (params) {
+              var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+                  pageSize: params.pageSize,   //页面大小
+                  pageNumber: params.pageNumber, //页码
+                  sortName: params.sort,  //排序列名
+                  sortOrder: params.order //排序方式
+              };
+              return temp;
+          };
+
+          var oTable = new TableInit();
+      })
 
 
           // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
       // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
 //      modal.find('.modal-title').text('New message to ' + book.id)
 //      modal.find('.modal-body input').val(book.name)
-})
 </script>
 </html>
