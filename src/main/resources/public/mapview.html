@@ -18,10 +18,10 @@
 
     <input type="button" class="button" value="开始编辑折线" onClick="editor.startEditLine()"/>
     <input type="button" class="button" value="结束编辑折线" onClick="editor.closeEditLine()"/>
-
+    <input type="button" class="button" value="鼠标绘制线" id="line"/>
 </div>
 <script type="text/javascript" src="/js/jquery.min-2.1.4.js"></script>
-<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.0&key=ada0d542b8f1606bb5bf114fb35638c4&plugin=AMap.PolyEditor"></script>
+<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.0&key=ada0d542b8f1606bb5bf114fb35638c4&plugin=AMap.PolyEditor,AMap.MouseTool"></script>
 <script type="text/javascript">
     var map = new AMap.Map('container',{
         resizeEnable: true,
@@ -71,8 +71,15 @@
         var maker=new AMap.Marker({
             position:makers[i].split(","),
             map:map,
-            animation:"AMAP_ANIMATION_BOUNCE",
+//            animation:"AMAP_ANIMATION_BOUNCE",
             title:"这是第"+i+"个标记"
+        });
+//        maker.setShape(new AMap.MarkerShape({
+//            type:"poly",
+//            coords:[makers[i].split(",")[0],makers[i].split(",")[1],100]
+//        }))
+        maker.on('click',function(){
+            alert(this.getPosition( ))
         })
     }
 
@@ -91,14 +98,31 @@
         editor._lineEditor.close();
     }
 
-    editor._lineEditor.on('end',function(){
-        alert( editor._line.getPath())
+    editor._lineEditor.on('end',function(e){
+        //获取折线对象的经纬度数组
+        alert(e.target.getPath())
+
     })
 
     editor._lineEditor.on('addnode',function(e){
-
+            alert(e.lnglat);
     })
 
+
+    editor._lineEditor.on('adjust',function(e){
+        alert(e.lnglat);
+    })
+
+    //鼠标绘制成线
+    var mouseTool = new AMap.MouseTool(map);
+
+    $("#line").bind('click',function(){
+        mouseTool.polyline();
+    })
+
+    mouseTool.on('draw',function(e){
+        alert(e.obj.getPath())
+    })
 </script>
 </body>
 </html>

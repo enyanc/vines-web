@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html><head>
+    <title>HTML5 QR code Reader</title>
+</head>
+
+<script src="/js/code/code1/zepto.js"></script>
+<script src="/js/code/code1/code/qrcode.lib.min.js"></script>
+<script src="/js/code/code1/qrcode.js"></script>
+<link rel="stylesheet" href="/js/code/code1/my.css"/>
+<script type="text/javascript">
+    $(function() {
+        Qrcode.init($('[node-type=qr-btn]'));
+    });
+</script>
+<body>
+
+<div>
+    <div class="qr-btn" node-type="qr-btn">QRcode1
+        <input node-type="jsbridge" type="file" name="myPhoto" value="QRcode1" />
+    </div>
+</div>
+</body></html>
